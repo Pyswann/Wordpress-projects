@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-api_key = "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"
+api_key = "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"
 kw = str(input("enter your keyword: "))
 faq_prompt = f"Write 5 faqs on {kw} that are highly asked on google. Answer them with the tone of simple, straight, and professional. The answer should be in 25 words"
 
@@ -16,16 +16,14 @@ def oai_ans(prompt):
   frequency_penalty=0,
   presence_penalty=0
   )
-  return response.choices[0].text.strip().split("\n")
+  faq_list = response.choices[0].text.strip().split("\n")
+  dog_faq = {}
+  i = 0
+  for i in range(0, len(faq_list), 2):
+    question = faq_list[i].strip()
+    answer = faq_list[i + 1].strip()
+    dog_faq[question] = answer
+  return dog_faq
 
-faqs = oai_ans(faq_prompt)
-print(faqs[1])
-
-
-
-
-
-
-
-
-
+x = oai_ans(faq_prompt)
+print(x)
