@@ -1,19 +1,26 @@
 from openai import OpenAI
 
-api_key = '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'
+api_key = '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'
+client = OpenAI(api_key=api_key)
+kw = "Rolex vs Titan"
 
-# prompt = 'Generate 4 subheadings on the "how to keep your cat\'s litter box clean" keyword. Make sure all the subheadings are relevant to kw, and the reader can get valuable information from them. Under each subheading provide detailed answers in multiple paragraphs.'
-def chat_gpt(prmpt):
-    client = OpenAI(api_key=api_key)
-    response = client.completions.create(
-    model="gpt-3.5-turbo-instruct",
-    prompt=prmpt,
-    temperature=1,
-    max_tokens=2000,
-    top_p=1,
-    frequency_penalty=0,
-    presence_penalty=0
+
+def oai_output(prompt):
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {
+                "role": "system",
+                "content": prompt
+            }
+        ],
+        temperature=1,
+        max_tokens=2000,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0
     )
-    return response.choices[0].text.strip()
-x = chat_gpt('Generate 4 subheadings on the "how to keep your cat\'s litter box clean" keyword. Make sure all the subheadings are relevant to kw, and the reader can get valuable information from them. Under each subheading provide detailed answers in multiple paragraphs.')
+    return response.choices[0].message.content
+
+x = oai_output(f"Craft a concise, informative, and professional introduction for the keyword {kw}. In the first paragraph (30-35 words), define the importance of the keyword and highlight potential problems it poses to readers. In the next paragraph (30-35 words), provide a solution based on the issues mentioned. In the last paragraph (30-35 words), explain why the upcoming content on this keyword will be an ideal read.")
 print(x)

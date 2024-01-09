@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-api_key = "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"
+api_key = "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"
 kw = str(input("enter your keyword: "))
 faq_prompt = f"Write 5 faqs on {kw} that are highly asked on google. Answer them with the tone of simple, straight, and professional. The answer should be in 25 words"
 
@@ -27,3 +27,15 @@ def oai_ans(prompt):
 
 x = oai_ans(faq_prompt)
 print(x)
+print(type(x))
+
+
+
+
+
+
+
+
+
+
+
