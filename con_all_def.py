@@ -1,5 +1,5 @@
 from openai import OpenAI
-api_key = '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'
+api_key = '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'
 client = OpenAI(api_key=api_key)
 
 
@@ -14,9 +14,11 @@ def oai_command(prompt):
         presence_penalty=0
     )
     return response.choices[0].text.strip()
+# x = oai_command("what is love")
+# print(x)
 
 
-def oai_output(prompt):
+def oai_chat(prompt):
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
@@ -32,6 +34,8 @@ def oai_output(prompt):
         presence_penalty=0
     )
     return response.choices[0].message.content.strip()
+x = oai_chat("what is love")
+print(x)
 
 
 def spliting(variable):
@@ -44,3 +48,17 @@ def spliting(variable):
     return dicti
 
 
+def create_dictionary(text):
+    # Splitting text into paragraphs using '\n\n'
+    paragraphs = text.split('\n\n')
+    # Creating a dictionary to store key-value pairs
+    data_dict = {}
+    # Extracting heading and paragraph for each entry
+    for paragraph in paragraphs:
+        lines = paragraph.split('\n', 1)  # Splitting each paragraph into heading and content
+        if len(lines) == 2:
+            a = lines.split("\n\n")
+            heading, content = a
+            data_dict[heading] = content
+
+    return data_dict
